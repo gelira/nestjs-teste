@@ -7,9 +7,9 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+      transform: true,
     }),
   );
-
   await app.listen(3000);
 }
 bootstrap();
