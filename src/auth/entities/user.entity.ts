@@ -20,7 +20,9 @@ export class User {
   @Prop()
   nome: string;
 
-  @Prop()
+  @Prop({
+    unique: true,
+  })
   email: string;
 
   @Prop()
