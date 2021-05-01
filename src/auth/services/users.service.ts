@@ -23,4 +23,8 @@ export class UsersService {
     const user = new this.userModel({ email, nome, senha: hashedSenha });
     return user.save();
   }
+
+  async findUserByEmail(email: string) {
+    return this.userModel.findOne({ email });
+  }
 }
