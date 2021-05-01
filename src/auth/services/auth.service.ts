@@ -22,7 +22,7 @@ export class AuthService {
 
   generateToken(user) {
     const payload = {
-      id: user.id,
+      user_id: user.id,
     };
     return {
       token: this.jwtService.sign(payload),
