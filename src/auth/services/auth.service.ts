@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { UsersService } from './users.service';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
   async validateUserLocal(email: string, senha: string) {
     const user = await this.usersService.findUserByEmail(email);
@@ -14,5 +18,14 @@ export class AuthService {
       }
     }
     return null;
+  }
+
+  generateToken(user) {
+    const payload = {
+      id: user.id,
+    };
+    return {
+      token: this.jwtService.sign(payload),
+    };
   }
 }
