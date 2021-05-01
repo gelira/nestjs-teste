@@ -3,10 +3,12 @@ import { PessoasService } from './services/pessoas.service';
 import { PessoasController } from './controllers/pessoas.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Pessoa, PessoaSchema } from './entities/pessoa.entity';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Pessoa.name, schema: PessoaSchema }]),
+    AuthModule,
   ],
   controllers: [PessoasController],
   providers: [PessoasService],

@@ -9,13 +9,16 @@ import {
   NotFoundException,
   HttpCode,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { PessoasService } from '../services/pessoas.service';
 import { CreatePessoaDto } from '../dto/create-pessoa.dto';
 import { UpdatePessoaDto } from '../dto/update-pessoa.dto';
 import { ParseObjectIdPipe } from '../../pipes/mongodb-objectid.pipe';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('pessoas')
+@UseGuards(JwtAuthGuard)
 export class PessoasController {
   constructor(private readonly pessoasService: PessoasService) {}
 
