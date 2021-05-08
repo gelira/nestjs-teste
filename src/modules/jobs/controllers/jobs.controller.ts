@@ -2,12 +2,16 @@ import { Controller } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import { NotificationsService } from 'src/modules/notifications/services/notifications.service';
 
+interface QuadradoJobDto {
+  numero: number;
+}
+
 @Controller()
 export class JobsController {
   constructor(private notificationsService: NotificationsService) {}
 
   @EventPattern('quadrado')
-  async teste(@Payload() data: any, @Ctx() context: RmqContext) {
+  async teste(@Payload() data: QuadradoJobDto, @Ctx() context: RmqContext) {
     const channel = context.getChannelRef();
     const originalMsg = context.getMessage();
 
