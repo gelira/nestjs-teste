@@ -6,6 +6,7 @@ import { Pessoa, PessoaSchema } from './entities/pessoa.entity';
 import { AuthModule } from 'src/auth/auth.module';
 import { TesteModule } from 'src/teste/teste.module';
 import { TesteGateway } from './gateways/teste.gateway';
+import { SocketioEmitterService } from './services/socketio-emitter.service';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { TesteGateway } from './gateways/teste.gateway';
     TesteModule,
   ],
   controllers: [PessoasController],
-  providers: [PessoasService, TesteGateway],
+  providers: [PessoasService, TesteGateway, SocketioEmitterService],
+  exports: [SocketioEmitterService],
 })
 export class PessoasModule {}
