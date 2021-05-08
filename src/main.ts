@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
-import { RedisIoAdapter } from './modules/pessoas/gateways/redis.adapter';
+import { RedisIoAdapter } from './ws-adapters/redis.adapter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
