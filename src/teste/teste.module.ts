@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import {
   ClientProxyFactory,
   ClientsModule,
   Transport,
 } from '@nestjs/microservices';
+import { PessoasModule } from 'src/pessoas/pessoas.module';
 import { TesteController } from './teste.controller';
 
 @Module({
@@ -23,6 +24,7 @@ import { TesteController } from './teste.controller';
         }),
       },
     ]),
+    forwardRef(() => PessoasModule),
   ],
   controllers: [TesteController],
   providers: [
