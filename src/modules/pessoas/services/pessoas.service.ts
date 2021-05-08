@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreatePessoaDto } from '../dto/create-pessoa.dto';
@@ -9,11 +10,21 @@ import { Pessoa, PessoaDocument } from '../entities/pessoa.entity';
 export class PessoasService {
   constructor(
     @InjectModel(Pessoa.name) private pessoaModel: Model<PessoaDocument>,
+    @Inject('JOBS_SERVICE') private jobsService: ClientProxy,
   ) {}
 
   async create(createPessoaDto: CreatePessoaDto) {
     const pessoa = new this.pessoaModel(createPessoaDto);
-    return pessoa.save();
+    await pessoa.save();
+
+    this.jobsService.emit('pessoa_created', {
+      id: pessoa.id,
+      nome: pessoa.nome,
+      idade: pessoa.idade,
+      sexo: pessoa.sexo,
+    });
+
+    return pessoa;
   }
 
   findAll() {

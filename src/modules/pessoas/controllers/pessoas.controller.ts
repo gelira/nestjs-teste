@@ -10,23 +10,17 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
-  Inject,
 } from '@nestjs/common';
 import { PessoasService } from '../services/pessoas.service';
 import { CreatePessoaDto } from '../dto/create-pessoa.dto';
 import { UpdatePessoaDto } from '../dto/update-pessoa.dto';
 import { ParseObjectIdPipe } from '../../../pipes/mongodb-objectid.pipe';
 import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
-import { ClientProxy } from '@nestjs/microservices';
-import { TesteDto } from '../dto/teste.dto';
 
 @Controller('pessoas')
 @UseGuards(JwtAuthGuard)
 export class PessoasController {
-  constructor(
-    private readonly pessoasService: PessoasService,
-    @Inject('JOBS_SERVICE') private jobsService: ClientProxy,
-  ) {}
+  constructor(private readonly pessoasService: PessoasService) {}
 
   checkNotFound(pessoa: any) {
     if (!pessoa) {
@@ -42,14 +36,6 @@ export class PessoasController {
   @Get()
   findAll() {
     return this.pessoasService.findAll();
-  }
-
-  @HttpCode(HttpStatus.NO_CONTENT)
-  @Post('teste')
-  async teste(@Body() testeDto: TesteDto) {
-    this.jobsService.emit('quadrado', {
-      numero: testeDto.numero,
-    });
   }
 
   @Get(':id')
