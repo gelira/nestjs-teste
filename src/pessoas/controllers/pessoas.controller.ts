@@ -11,7 +11,6 @@ import {
   HttpStatus,
   UseGuards,
   Inject,
-  ParseIntPipe,
 } from '@nestjs/common';
 import { PessoasService } from '../services/pessoas.service';
 import { CreatePessoaDto } from '../dto/create-pessoa.dto';
@@ -19,6 +18,7 @@ import { UpdatePessoaDto } from '../dto/update-pessoa.dto';
 import { ParseObjectIdPipe } from '../../pipes/mongodb-objectid.pipe';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { ClientProxy } from '@nestjs/microservices';
+import { TesteSocketioDto } from '../dto/teste-socketio.dto';
 
 @Controller('pessoas')
 @UseGuards(JwtAuthGuard)
@@ -45,12 +45,16 @@ export class PessoasController {
   }
 
   @HttpCode(HttpStatus.NO_CONTENT)
-  @Get('teste/:n')
-  async teste(@Param('n', ParseIntPipe) n: number) {
+  @Post('teste')
+  async teste(@Body() testeSocketioDto: TesteSocketioDto) {
     const moment = new Date();
     moment.setSeconds(moment.getSeconds() + 10);
 
-    this.client.emit('quadrado', { time: moment.getTime(), numero: n });
+    this.client.emit('quadrado', {
+      time: moment.getTime(),
+      numero: testeSocketioDto.numero,
+      sid: testeSocketioDto.sid,
+    });
   }
 
   @Get(':id')
