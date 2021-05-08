@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
+import { RedisIoAdapter } from './pessoas/gateways/redis.adapter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +13,8 @@ async function bootstrap() {
   app.enableCors({
     origin: ['*'],
   });
+
+  app.useWebSocketAdapter(new RedisIoAdapter(configService, app));
 
   app.useGlobalPipes(
     new ValidationPipe({
