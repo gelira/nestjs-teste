@@ -7,13 +7,25 @@
   <title>Document</title>
 </head>
 <body>
+  <h1>Socket ID: <span id="socket_id"></span></h1>
+  <br>
+  <h2>Pessoa ID: <span id="pessoa_id"></span></h2>
+  <h2>Nome: <span id="nome"></span></h2>
+  <h2>Idade: <span id="idade"></span></h2>
+  <h2>Sexo: <span id="sexo"></span></h2>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
   <script>
     const socket = io('http://localhost:3000', { 
       autoConnect: false,
     });
-    socket.on('connect', () => console.log(socket.id));
-    socket.on('quadrado', data => console.log(data));
+    socket.on('connect', () => document.getElementById('socket_id').innerHTML = socket.id);
+    socket.on('pessoa_created', data => {
+      const { id, nome, idade, sexo } = data;
+      document.getElementById('pessoa_id').innerHTML = id;
+      document.getElementById('nome').innerHTML = nome;
+      document.getElementById('idade').innerHTML = `${idade} anos`;
+      document.getElementById('sexo').innerHTML = sexo === 'M' ? 'Masculino' : 'Feminino';
+    });
     socket.connect();
   </script>
 </body>
