@@ -32,6 +32,8 @@
     "@nestjs/platform-express": "^7.6.15",
     "@nestjs/platform-socket.io": "^7.6.15",
     "@nestjs/websockets": "^7.6.15",
+    "@socket.io/redis-emitter": "^4.0.0",
+    "@types/redis": "^2.8.28",
     "amqp-connection-manager": "^3.2.2",
     "amqplib": "^0.7.1",
     "bcrypt": "^5.0.1",
@@ -41,9 +43,11 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.6"
+    "rxjs": "^6.6.6",
+    "socket.io-redis": "^5.4.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",
