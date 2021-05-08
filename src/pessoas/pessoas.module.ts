@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Pessoa, PessoaSchema } from './entities/pessoa.entity';
 import { AuthModule } from 'src/auth/auth.module';
 import { TesteModule } from 'src/teste/teste.module';
+import { TesteGateway } from './gateways/teste.gateway';
 
 @Module({
   imports: [
@@ -13,6 +14,6 @@ import { TesteModule } from 'src/teste/teste.module';
     TesteModule,
   ],
   controllers: [PessoasController],
-  providers: [PessoasService],
+  providers: [PessoasService, TesteGateway],
 })
 export class PessoasModule {}
