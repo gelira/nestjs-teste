@@ -3,7 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PessoasModule } from './modules/pessoas/pessoas.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { TesteModule } from './modules/teste/teste.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
+import { JobsModule } from './modules/jobs/jobs.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { TesteModule } from './modules/teste/teste.module';
     }),
     PessoasModule,
     AuthModule,
-    TesteModule,
+    JobsModule,
+    NotificationsModule,
   ],
 })
 export class AppModule {}

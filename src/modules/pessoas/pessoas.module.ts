@@ -4,18 +4,15 @@ import { PessoasController } from './controllers/pessoas.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Pessoa, PessoaSchema } from './entities/pessoa.entity';
 import { AuthModule } from 'src/modules/auth/auth.module';
-import { TesteModule } from 'src/modules/teste/teste.module';
-import { TesteGateway } from './gateways/teste.gateway';
-import { SocketioEmitterService } from './services/socketio-emitter.service';
+import { JobsModule } from '../jobs/jobs.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Pessoa.name, schema: PessoaSchema }]),
     AuthModule,
-    TesteModule,
+    JobsModule,
   ],
   controllers: [PessoasController],
-  providers: [PessoasService, TesteGateway, SocketioEmitterService],
-  exports: [SocketioEmitterService],
+  providers: [PessoasService],
 })
 export class PessoasModule {}
