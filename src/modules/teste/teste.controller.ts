@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
-import { SocketioEmitterService } from 'src/pessoas/services/socketio-emitter.service';
+import { SocketioEmitterService } from 'src/modules/pessoas/services/socketio-emitter.service';
 
 interface TesteData {
   numero: number;

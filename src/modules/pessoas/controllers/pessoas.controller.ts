@@ -15,8 +15,8 @@ import {
 import { PessoasService } from '../services/pessoas.service';
 import { CreatePessoaDto } from '../dto/create-pessoa.dto';
 import { UpdatePessoaDto } from '../dto/update-pessoa.dto';
-import { ParseObjectIdPipe } from '../../pipes/mongodb-objectid.pipe';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { ParseObjectIdPipe } from '../../../pipes/mongodb-objectid.pipe';
+import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
 import { ClientProxy } from '@nestjs/microservices';
 import { TesteSocketioDto } from '../dto/teste-socketio.dto';
 
